@@ -36,7 +36,8 @@ WITH subquery AS (
         LEFT JOIN employer AS er ON v.employer_id = er.employer_id
         GROUP BY v.employer_id
     )
-    SELECT PERCENTILE_CONT(0.5) WITHIN GROUP (ORDER BY vac_per_er) AS median_vacancies_per_employer
+    SELECT PERCENTILE_CONT(0.5) WITHIN GROUP (ORDER BY subquery.vac_per_er) AS median_vacancies_per_employer
+    FROM subquery
  ;
 
 
